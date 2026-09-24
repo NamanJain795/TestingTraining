@@ -1,0 +1,74 @@
+package package1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Lab5 {
+      public static void main(String[] args) {
+// ------------------------------------------------- Part 1 ---------------------------------------------------
+            WebDriver driver = new ChromeDriver();
+            driver.get("https://tutorialsninja.com/demo/");
+            
+            String title = driver.getTitle();
+            if(title.equals("Your Store")) {
+                  System.out.println("Title found");
+            }
+            else {
+                  System.out.println("Title not found");
+            }
+            
+            driver.findElement(By.linkText("My Account")).click();
+            driver.findElement(By.linkText("Register")).click();
+            
+            if(driver.findElement(By.xpath("//h1[text() = 'Register Account']")).isDisplayed()) {
+                  System.out.println("Register account heading found");
+            }
+            else {
+                  System.out.println("Register account heading not found");
+            }
+            
+            driver.findElement(By.xpath("//input[@type = 'submit']")).click();
+            
+            String warningMessage = driver.findElement(By.xpath("//div[. = 'Warning: You must agree to the Privacy Policy!']")).getText();
+            
+            if(warningMessage.equals("Warning: You must agree to the Privacy Policy!")) {
+                  System.out.println("Warning is displayed");
+            }
+            else {
+                  System.out.println("Warning message not displayed as expected");
+            }
+// ----------------------------------------------------  Part 2 ---------------------------------------------------
+            driver.findElement(By.id("input-firstname")).sendKeys("abcdefghijklmnopqrstuvwxyzabcdefg");
+            driver.findElement(By.id("input-lastname")).sendKeys("abcdefghijklmnopqrstuvwxyzabcdefg");
+            
+            driver.findElement(By.id("input-email")).sendKeys("naman.test@gmail.com");
+            
+            driver.findElement(By.id("input-telephone")).sendKeys("9876543210");
+            
+            driver.findElement(By.xpath("//input[@type = 'submit']")).click();
+            
+            String firstNameError = driver.findElement(By.xpath("//div[@class = 'text-danger']")).getText();
+            if(firstNameError.equals("First Name must be between 1 and 32 characters!")) {
+                  System.out.println("First name validation failed");
+            }
+            else {
+                  System.out.println("First name validation passed");
+            }
+            
+            String lastNameError = driver.findElement(By.xpath("//div[@class = 'text-danger']")).getText();
+            if(lastNameError.equals("Last Name must be between 1 and 32 characters!")) {
+                  System.out.println("Last name validation failed");
+            }
+            else {
+                  System.out.println("Last name validation passed");
+            }
+            
+            
+            
+// ------------------------------------------------ Part 4 --------------------------------------------------
+            driver.findElement(By.id("input-password")).sendKeys("Naman@123");
+            driver.findElement(By.id("input-confirm")).sendKeys("Naman@123");
+            
+      }
+}
