@@ -1,0 +1,69 @@
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeMethod;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+
+public class testng8 {
+	WebDriver driver;
+
+    @Test
+    public void test() {
+	// ---------------------------------------------- LAB - 3 ------------------------------------------------------------------
+        driver.findElement(By.xpath("//a[@class='dropdown-toggle' and text()='Desktops']")).click();
+        
+        driver.findElement(By.xpath("//a[contains(@href,'path=20_27') and contains(text(),'Mac')]")).click();
+        
+        driver.findElement(By.xpath("//select[@id='input-sort']/option[normalize-space()='Name (A - Z)']")).click();
+        
+        driver.findElement(By.xpath("//button[@onclick=\"cart.add('41', '1');\" and .//span[normalize-space()='Add to Cart']]")).click();
+        
+        String successMessage = driver.findElement(By.xpath("//div[contains(@class,'alert-success') and .//a[normalize-space()='MacBook']]")).getText();
+        System.out.println(successMessage);
+
+// ------------------------------------------------------------ LAB - 4 -------------------------------------------------------------        
+//        String title = driver.getTitle();
+//        System.out.println("Page Title: " + title);
+//        
+//        driver.findElement(By.xpath("//a[@class='dropdown-toggle' and text()='Desktops']")).click();
+//        
+//        driver.findElement(By.xpath("//a[contains(@href,'path=20_27') and contains(text(),'Mac')]")).click();
+//        
+//        driver.findElement(By.xpath("//select[@id='input-sort']/option[normalize-space()='Name (A - Z)']")).click();
+//        
+//        driver.findElement(By.xpath("//button[@onclick=\"cart.add('41', '1');\" and .//span[normalize-space()='Add to Cart']]")).click();
+//        
+//        driver.findElement(By.xpath("//input[@name='search' and @placeholder='Search']")).sendKeys("Mobile");
+//        
+//        driver.findElement(By.xpath("//button[contains(@class,'btn-default') and .//i[contains(@class,'fa-search')]]")).click();
+//        
+//        driver.findElement(By.xpath("//input[@name='search' and @placeholder='Search']")).clear();
+//        
+//        driver.findElement(By.xpath("//input[@type='checkbox' and @id='description']")).click();
+//        
+//        driver.findElement(By.xpath("//input[@id='button-search' and @value='Search']")).click();
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        driver = new ChromeDriver();
+        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        
+        driver.get("https://tutorialsninja.com/demo/");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
