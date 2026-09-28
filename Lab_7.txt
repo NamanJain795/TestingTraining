@@ -1,0 +1,27 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Lab7 {
+    public static void main(String agrs[]) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://letcode.in/alert");
+        driver.findElement(By.id("accept")).click();
+        Thread.sleep(3000);
+        Alert simpleAlert = driver.switchTo().alert();
+        simpleAlert.accept();
+        driver.findElement(By.id("confirm")).click();
+        Thread.sleep(3000);
+        Alert confirmAlert = driver.switchTo().alert();
+        System.out.println("Confirm Alert Message"+confirmAlert.getText());
+        confirmAlert.accept();
+
+        driver.findElement(By.id("prompt")).click();
+        Thread.sleep(3000);
+        Alert promptAlert = driver.switchTo().alert();
+        promptAlert.sendKeys("Welcome");
+        promptAlert.accept();
+        driver.quit();
+    }
+}
